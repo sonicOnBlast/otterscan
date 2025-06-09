@@ -1,6 +1,5 @@
 import { QueryClientProvider } from "@tanstack/react-query";
-import { isAddress } from "ethers";
-import { FC, lazy, Suspense, useMemo, useState } from "react";
+import { FC, Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import {
   Await,
@@ -22,8 +21,9 @@ import { loader as searchLoader } from "./Search";
 import { populateChainInfo } from "./useChainInfo";
 import { createRuntime, RuntimeContext } from "./useRuntime";
 import WarningHeader from "./WarningHeader";
+import { OtterscanConfig } from "./useConfig";  // ensure this type is imported
 
-const config = {
+const config: OtterscanConfig = {
   erigonURL: "https://virtual.sonic.rpc.tenderly.co/5a4b6992-4677-4310-87fd-c39a2bf0aa88",
   beaconAPI: null,
   experimentalFixedChainId: 220303012009,
@@ -46,7 +46,7 @@ const config = {
   },
 };
 
-const runtime = populateChainInfo(createRuntime(config));
+const runtime = populateChainInfo(createRuntime(Promise.resolve(config)));
 
 const loader: LoaderFunction = async () => ({
   config,
