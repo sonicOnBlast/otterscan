@@ -15,6 +15,10 @@ import {
 } from "ethers";
 
 export type FormatFunc<T> = (value: any) => T;
+const result: TransactionResponseParams = {
+  authorizationList: null, // explicitly add this
+  // your other properties here...
+};
 
 type FormatObject<T> = {
   [K in keyof T]: T[K] extends FormatFunc<infer U> ? U : never;
