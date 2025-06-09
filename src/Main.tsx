@@ -1,9 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
+const Main: React.FC = () => {
+  return (
+    <>
+      <Header />
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Suspense fallback={<div className="w-screen h-screen"></div>}>
+          <Outlet />
+        </Suspense>
+      </ErrorBoundary>
+    </>
+  );
+};
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+export default Main; // <-- crucial line
