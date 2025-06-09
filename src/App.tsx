@@ -88,7 +88,8 @@ const BroadcastTransactionPage = lazy(
 
 const config: OtterscanConfig = {
   erigonURL: "https://virtual.sonic.rpc.tenderly.co/5a4b6992-4677-4310-87fd-c39a2bf0aa88",
-  beaconAPI: null,
+  beaconAPI: undefined, // use undefined instead of null
+
   experimentalFixedChainId: 220303012009,
   chainInfo: {
     name: "Tenderly Fork (Mainnet)",
