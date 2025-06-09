@@ -86,9 +86,30 @@ const BroadcastTransactionPage = lazy(
   () => import("./execution/BroadcastTransactionPage"),
 );
 
-const config = loadOtterscanConfig();
+const config: OtterscanConfig = {
+  erigonURL: "https://virtual.sonic.rpc.tenderly.co/5a4b6992-4677-4310-87fd-c39a2bf0aa88",
+  beaconAPI: null,
+  experimentalFixedChainId: 220303012009,
+  chainInfo: {
+    name: "Tenderly Fork (Mainnet)",
+    faucets: [],
+    nativeCurrency: {
+      name: "Sonic",
+      symbol: "S",
+      decimals: 18,
+    },
+  },
+  sourcify: {
+    sources: {
+      "Sourcify Servers": {
+        url: "https://repo.sourcify.dev",
+        backendFormat: "RepositoryV1",
+      },
+    },
+  },
+};
 
-const runtime = populateChainInfo(createRuntime(config));
+const runtime = populateChainInfo(createRuntime(Promise.resolve(config)));
 
 /**
  * Triggers both config loading and runtime probing/building in parallel.
